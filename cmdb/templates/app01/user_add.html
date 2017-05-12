@@ -1,0 +1,25 @@
+{% extends "app01/base.html" %}
+{% block content %}
+		<div id="content">
+			<div class="con">
+				<p class="breadcrumb">
+				<a href="javascript:void(0);">首页  ></a>
+				<a href="javascript:void(0);">用户管理 ></a>
+				<a href="javascript:void(0);">用户添加</a></p></div>
+		
+			<form action="/app01/user_add" method="POST">
+				{% csrf_token %}
+				<p><input type="text" id="user" name="username" placeholder="请输入用户名" class="username" /></p>
+	    		<p><input type="password" id="pass" name="password"  placeholder="请输入密码" class="password" /></p>
+	    		<p><input type="text" id="pass" name="email"  placeholder="请输入邮箱" class="password" />
+	  			 <p><select name="usertype">
+					{% for item in usertype %}
+					<option value="{{item.id}}">{{item.typename}}</option>
+					{% endfor %}
+				</select></p>
+				<p><input type="submit" value="提 交"/></p>
+                    <label style='color:red'>{{status}}</label></p>
+			</form><br><br>
+		</div>
+{% endblock %}
+

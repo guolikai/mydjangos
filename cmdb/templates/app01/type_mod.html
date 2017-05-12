@@ -1,0 +1,22 @@
+{% extends "app01/base.html" %}
+{% block content %}
+		<div id="content">
+		<div class="con">
+				<p class="breadcrumb"><a href="javascript:void(0);">首页  ></a><a href="javascript:void(0);">用户类型管理 ></a><a href="javascript:void(0);">用户类型添加</a></p>
+			</div><!--
+			<table style='margin-left: 4%;' border="2">
+				<tr><th>已有用户类型</th></tr>
+				{% for item in data %}
+					<tr><td>{{item.typename}}</td></tr>
+				{% endfor %}
+			</table> -->
+				<h4 style="color:red">{{status}}</h4>
+				<form action="/app01/type_mod" method="POST">
+				{% csrf_token %}
+					<p><input name="typenameold"  placeholder="请输入要修改的用户类型"></p>
+					<p><input name="typenamenew"  placeholder="请输入新的用户类型"></p>
+					<P><input type="submit" value="提 交"/></P>
+				</form>
+		
+		</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "app01/base.html" %}
+{% block content %}
+    <div id="content" xmlns="http://www.w3.org/1999/html">
+		<div class="con">
+				<p class="breadcrumb"><a href="javascript:void(0);">首页  ></a><a href="javascript:void(0);">用户管理 ></a><a href="javascript:void(0);">用户修改</a></p>
+				
+				<form action="/app01/host_mod" method="POST">
+				{% csrf_token %}
+				<p><select name='selectval'>
+					<option value='Hostname'>hostname</option>
+					<option value='Ip'>ip</option>
+				</select>修改选项</p>
+					<p><input name="ip"  placeholder="修改的主机IP"></p>
+					<p><input name="infonew"   placeholder="新的主机信息"></p>
+                    <p><input type="submit" value="提 交"/></p>
+					<p><h4 style="color:red">{{status}}</h4></p>
+				</form>
+		
+		</div>  
+	</div>
+{% endblock %}

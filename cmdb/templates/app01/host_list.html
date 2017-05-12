@@ -1,0 +1,39 @@
+{% extends "app01/base.html" %}
+{% block content %}
+    <div id="content">
+        <div class="con">
+            <p class="breadcrumb"><a href="javascript:void(0);">首页  ></a><a href="javascript:void(0);">主机管理 ></a><a href="javascript:void(0);">主机列表</a></p>
+        </div>
+        <table style='margin-left: 4%;' border="2">
+						<tr>
+							<th>主机名</th>
+							<th>ip</th>
+							<th>所属用户组</th>
+							<th>所属用户组ID</th>
+							<th>主机创建时间</th>
+							<th>主机更新时间</th>
+						</tr>
+						{% for item in data %}
+						<tr>
+							<td>{{item.hostname}}</td>
+							<td>{{item.ip}}</td>
+							<td>{{item.user_group.groupname}}</td>
+							<td>{{item.user_group.id}}</td>
+							<td>{{item.create_date|date:"Y-m-d H:i:s"}}</td>
+							<td>{{item.update_date|date:"Y-m-d H:i:s"}}</td>
+						<!-- item封装了Asset表中的所有字段：hostname,ip,user_group,create_date,update_date,
+						item.user_group对应的是UserGroup表中的对象 -->
+						</tr>
+						{% endfor %}
+        </table>
+        <div style='margin-left: 4%;'>总条数:{{count}} 每页显示:<select class='choice' id='s1' onchange='ChangPageItem(this);'>
+					<option value='5'>5</option>
+					<option value='10'>10</option>
+					<option value='20'>20</option>
+					<option value='30'>30</option>
+					<option value='40'>40</option>
+					<option value='50'>50</option></select>
+        </div>
+        <div style='margin-left: 4%;' id='Pageing'>{{page}}</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "app01/base.html" %}
+{% block content %}
+    <div id="content">
+        <div class="con">
+            <p class="breadcrumb">
+                <a href="javascript:void(0);">首页  ></a>
+				<a href="javascript:void(0);">用户组管理 ></a>
+				<a href="javascript:void(0);">用户组添加</a>
+            </p>
+        </div>
+        <form action="/app01/group_add" method="POST">
+            {% csrf_token %}
+            <p><input type="text" id="group" name="groupname" placeholder="请输入用户组名" class="username" /></p>
+            <p><input type="submit" value="提 交"/>
+            </p><label  style='color:red'>{{status}}</label></p>
+        </form>
+    </div>
+{% endblock %}

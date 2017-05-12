@@ -1,0 +1,22 @@
+{% extends "app01/base.html" %}
+{% block content %}
+    <div id="content">
+        <div class="con">
+            <p class="breadcrumb"><a href="javascript:void(0);">首页  ></a><a href="javascript:void(0);">用户类型管理 ></a><a href="javascript:void(0);">用户类型添加</a></p>
+        </div>
+        <!--
+			<table style='margin-left: 4%;' border="2">
+			<tr><th>已有用户类型</th></tr>
+			{% for item in data %}
+				<tr><td>{{item.typename}}</td></tr>
+				{% endfor %}</table>
+		-->
+				
+        <form action="/app01/user_del.html" method="POST">
+            {% csrf_token %}
+            <p><input name="username"  placeholder="要删除的用户名"></p>
+             <p><input type="submit" value="提 交"/></p>
+            <label style='color:red'>{{status}}</label>
+        </form><br><br>
+    </div>
+{% endblock %}

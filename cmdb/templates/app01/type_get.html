@@ -1,0 +1,15 @@
+{% extends "app01/base.html" %}
+{% block content %}
+		<div id="content">
+		<div class="con">
+				<p class="breadcrumb"><a href="javascript:void(0);">首页  ></a><a href="javascript:void(0);">用户类型管理 ></a><a href="javascript:void(0);">用户类型添加</a></p>
+			</div>
+			<table style='margin-left: 4%;' border="2">
+				<tr><th>用户类型ID</th><th>用户类型</th></tr>
+				{% for item in data %}
+					<tr><td>{{item.id}}</td>
+					<td>{{item.typename}}</td></tr>
+				{% endfor %}
+			</table>
+		</div>
+{% endblock %}

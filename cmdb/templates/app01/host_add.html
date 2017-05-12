@@ -1,0 +1,21 @@
+{% extends "app01/base.html" %}
+{% block content %}
+    <div id="content">
+		<div class="con">
+            <p class="breadcrumb"><a href="javascript:void(0);">首页  ></a><a href="javascript:void(0);">主机管理 ></a><a href="javascript:void(0);">添加主机</a></p>
+        </div>
+        <h3 style="color:red">{{status}}</h3>
+        <form action="/app01/host_add" method="POST">
+				{% csrf_token %}
+					<p><input name="hostname"  placeholder="请输入主机名"></p>
+					<p><input name="ip"  placeholder="请输入主机IP"></p>
+					<p><select name="group">
+						{% for item in group %}
+						<option value="{{item.id}}">{{item.groupname}}</option>
+						{% endfor %}
+					</select>
+					</p>
+					<p><input type="submit" value="提 交"/></p>
+        </form>
+    </div>
+{% endblock %}

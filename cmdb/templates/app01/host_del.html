@@ -1,0 +1,21 @@
+{% extends "app01/base.html" %}
+{% block content %}
+		<div id="content">
+		<div class="con">
+				<p class="breadcrumb"><a href="javascript:void(0);">首页  ></a><a href="javascript:void(0);">用户组管理 ></a><a href="javascript:void(0);">用户组删除</a></p>
+			</div>
+				<form action="/app01/host_del" method="POST">
+				{% csrf_token %}
+					<!--  <p><input name="hostname"  placeholder="要删除的主机"></p>-->
+				<p> <select name="hostname">
+					{% for item in data %}
+					<option value="{{item.hostname}}">{{item.hostname}}</option>
+					{% endfor %}
+					</select>
+				</p>
+					 <p><input type="submit" value="提 交"/></p>
+					<label style='color:red'>{{status}}</label>				
+				</form><br><br>
+		
+		</div>
+{% endblock %}

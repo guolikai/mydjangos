@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <title>{% block title %}主机管理系统{% endblock %}</title>
+	<link rel="stylesheet" href="/static/css/comm.css" type="text/css">
+	<link rel="stylesheet" href="/static/css/login.css" type="text/css">
+	<link rel="stylesheet" href="/static/css/index.css" type="text/css">
+	<script type="text/javascript" src="/static/js/jquery-1.4.2.js"></script>
+	<script type="text/javascript" src="/static/js/jquery.base64.js"></script>
+	<script type="text/javascript" src="/static/js/jquery.md5.js"></script>
+	<script type="text/javascript" src="/static/js/jquery.cookie.js"></script>	
+</head>
+<body> 
+<!--<div class="logo"><p class="logo_text">主机管理平台</p> </div>-->
+<!-- 左侧菜单选项========================================= -->
+	<div class="floatleft">
+        <p class="logo_p">欢迎登陆主机管理系统</p>
+		<ul class="nav">
+		<li class="nav_li">
+            <a id="typeMeun" href="javascript:void(0);" class="nav_a tb" >用户类型管理<span></span></a>
+			<ul class="detailed hidden">
+						<li><a class="focus" href="/app01/type_add">用户类型添加</a></li>
+						<li><a class="focus" href="/app01/type_del">用户类型删除</a></li>
+						<li><a class="focus" href="/app01/type_mod">用户类型修改</a></li>
+						<li><a class="focus" href="/app01/type_get">用户类型查找</a></li>
+					 </ul>
+            </li>
+			<li class="nav_li">
+			 	<a id="userMeun" href="javascript:void(0);" class="nav_a tb" >用户管理<span></span></a>
+					<ul class="detailed hidden">
+						<li><a class="focus" href="/app01/user_add">用户添加</a></li>
+						<li><a class="focus" href="/app01/user_del">用户删除</a></li>
+						<li><a class="focus" href="/app01/user_mod">用户修改</a></li>
+						<li><a class="focus" href="/app01/user_get">用户查找</a></li>
+					 </ul>
+            </li>
+			<li class="nav_li">
+			 	<a id="groupMeun" href="javascript:void(0);" class="nav_a tb" >用户组管理<span></span></a>
+					<ul class="detailed hidden">
+						<li><a class="focus" href="/app01/group_add">用户组添加</a></li>
+						<li><a class="focus" href="/app01/group_del">用户组删除</a></li>
+						<li><a class="focus" href="/app01/group_mod">用户组修改</a></li>
+						<li><a class="focus" href="/app01/group_get">用户组查找</a></li>
+					 </ul>
+            </li>
+            
+            <li class="nav_li">
+            	<a id="hostMeun" href="javascript:void(0);" class="nav_a tb" >主机管理<span></span></a>
+				<ul class="detailed hidden">
+						<li><a class="focus" href="/app01/host_add">添加主机</a></li>
+						<li><a class="focus" href="/app01/host_list">主机列表</a></li>
+						<li><a class="focus" href="/app01/host_mod">修改主机</a></li>
+						<li><a class="focus" href="/app01/host_del">删除主机</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<div class="floatright">
+        <div class="introduce">
+            <p class="platform"></p>
+            <p class="personal">{{username}}&nbsp;&nbsp;<a href='/app01/logout/'>退出</a></p>
+        </div>
+        {% block content %}
+                <div id="content">
+                    <div class="con">
+                        <p class="breadcrumb"><a href="javascript:void(0);">首页  ></a><a href="javascript:void(0);">运维平台</a>
+                    </div>
+
+                     <div class="member">
+                            <p class="head">运维部联系方式</p>
+                            <div class="member_con">
+                                <ul>
+                                    <li class="head">
+                                        <span class="name">联系人</span>
+                                        <span class="tel">联系电话</span>
+                                        <span class="e-mail">联系人邮箱</span>
+                                    </li>
+                                    <li>
+                                        <span class="name">郭立凯</span>
+                                        <span class="tel">18611899953</span>
+                                        <span class="e-mail">admin@lzhot.net</span>
+                                    </li>
+                                </ul>
+                            </div>
+                    </div>
+                </div>
+        {% endblock %}
+    </div>
+
+<script type="text/javascript">
+    $(".nav_li > a").click(function(){
+        $(this).parent().siblings().removeClass("focus");
+        $(this).parent().siblings().find("span").removeClass("close");
+        $(this).parent().siblings().find("ul").addClass("hidden");
+        $(this).parent().toggleClass("focus");
+        $(this).parent().find("ul").toggleClass("hidden");
+        $(this).find("span").toggleClass("close");
+    });
+    $(".detailed").find("li").click(function(){
+        $(".detailed >li").find("a").removeClass("focus");
+        $(this).find("a").addClass("focus");
+    });
+</script>
+</body>
+</html>

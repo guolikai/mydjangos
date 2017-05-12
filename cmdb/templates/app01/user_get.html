@@ -1,0 +1,18 @@
+{% extends "app01/base.html" %}
+{% block content %}
+    <div id="content">
+        <div class="con">
+            <p class="breadcrumb"><a href="javascript:void(0);">首页  ></a><a href="javascript:void(0);">用户管理 ></a><a href="javascript:void(0);">用户查找</a></p>
+        </div>
+        <table style='margin-left: 4%;' border="2">
+            <tr><th>用户名</th><th>用户密码</th><th>用户邮箱</th><th>用户类型</th></tr>
+            {% for item in data %}
+                <tr><td>{{item.username}}</td>
+                    <td>{{item.password}}</td>
+					<td>{{item.email}}</td>
+					<td>{{item.user_type_id}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
