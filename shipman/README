@@ -24,10 +24,13 @@ OPTIONS='--selinux-enabled --log-driver=journald --signature-verification=false 
 [root@localhost ~]# virtualenv  -p python3 /root/workspace/shipman-env --no-site-packages
 [root@localhost ~]# cd /root/workspace/shipman-env
 [root@localhost shipman]# source bin/activate
+(shipman-env) [root@localhost shipman]# pip3 install pycurl pymysql sqlalchemy tornado docker docker-py
+
+#拍错ImportError: pycurl: libcurl link-time ssl backend (none/other) is different from compile-time ssl backend (openssl)
 (shipman-env) [root@localhost shipman]# pip3 uninstall pycurl
 (shipman-env) [root@localhost shipman]# export PYCURL_SSL_LIBRARY=openssl
 (shipman-env) [root@localhost shipman]# easy_install-3.5 pycurl
-(shipman-env) [root@localhost shipman]# pip3 install pymysql sqlalchemy tornado docker docker-py
+
 
 3、### Docker Management System项目启动 ###
 (shipman-env) [root@localhost shipman]# python3 /root/workspace/shipman/lib/python3.5/site-packages/shipman/main.py  &
@@ -39,4 +42,3 @@ root       4178  3.1  2.8 279564 28432 pts/1    S    22:59   0:00 python3 /root/
 
 4、mysql数据库字符集设置
 http://database.51cto.com/art/201010/229171.htm
-
