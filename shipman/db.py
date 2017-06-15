@@ -81,6 +81,27 @@ class UserDB(Base):
         return ("<UserDB(name='%s',password='%s',user_group='%s'") % \
                (self.name, self.password, self.user_group)
 
+def insert_user_data(self,name,password,user_group):
+        from shipman.settings import DATABASES
+        from shipman.model.mysql_server import MysqlServer
+        db = MysqlServer(DATABASES)
+        import hashlib
+        m = hashlib.md5()
+        m.update(password.encode('utf-8'))
+        passwd = m.hexdigest()
+        sql = "insert into user(name,password,user_group) values('%s','%s','%s')" % (name,passwd,user_group)
+        db.execute_sql(sql)
+        db.close()
+        return 0
 
+ def main():
+    name='admin'
+    password = '123456'
+    user_group = 'Admin'
+    ret = insert_user_data(name, password, user_group)
+    if ret ==0:
+        print(u'%s用户插入成功' % name)
+        
 if __name__ == '__main__':
-    Base.metadata.create_all(engine)
+    if Base.metadata.create_all(engine):
+        main()
