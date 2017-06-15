@@ -3,7 +3,6 @@
 #Created on 2017-6-10 by Author:GuoLikai
 
 """ 执行mysql语句 """
-import hashlib
 from shipman.settings import DATABASES
 from shipman.model.mysql_server import MysqlServer
 
@@ -18,7 +17,11 @@ class UserSqlOperation(object):
 
     def insert_user_data(self,name,password,user_group):
         db = MysqlServer(DATABASES)
-        sql = "insert into user(name,password,user_group) values('%s','md5(%s)','%s')" % (name,password,user_group)
+        import hashlib
+        m = hashlib.md5()
+        m.update(password.encode('utf-8'))
+        passwd = m.hexdigest()
+        sql = "insert into user(name,password,user_group) values('%s','%s','%s')" % (name,passwd,user_group)
         db.execute_sql(sql)
         db.close()
         return 0
