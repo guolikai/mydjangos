@@ -164,6 +164,14 @@ class NodeInfo(object):
         return 0
 
     @staticmethod
+    def update_con_usage(con_id, con_ip, con_name, node_ip):
+        db = MysqlServer(DATABASES)
+        sql = "update con_usage set con_ip='%s',con_name='%s' where node_ip='%s' and con_id='%s'" % (con_ip, con_name, node_ip,con_id)
+        db.execute_sql(sql)
+        db.close()
+        return 0
+
+    @staticmethod
     def delete_con_usage(con_id):
         db = MysqlServer(DATABASES)
         sql = "delete from con_usage where con_id='%s'" % con_id
@@ -183,6 +191,14 @@ class NodeInfo(object):
     def get_con_usage_node_ip(con_id):
         db = MysqlServer(DATABASES)
         sql = "select node_ip from con_usage where con_id='%s'" % con_id
+        ret = db.run_sql(sql)
+        db.close()
+        return ret
+
+    @staticmethod
+    def get_con_usage_con_name(node_ip,con_name):
+        db = MysqlServer(DATABASES)
+        sql = "select * from con_usage where node_ip='%s' and con_name='%s'" % (node_ip,con_name)
         ret = db.run_sql(sql)
         db.close()
         return ret

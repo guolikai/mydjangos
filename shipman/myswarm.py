@@ -112,10 +112,14 @@ class Myswarm(object):
             client_ins.start(container_id)
             time.sleep(0.5)
             con_info = self._container_detail(node_ip, node_port,container_id)
-
             ret = NodeInfo.get_con_usage_info(container_id,node_ip)
+            print(ret)
             if len(ret) == 0:
                 NodeInfo.insert_con_usage(container_id[0:12],con_info['NetworkSettings']['IPAddress'],con_info['Name'].replace('/',''),node_ip)
+            else:
+                #print('update_con_usage')
+                #print(con_info['NetworkSettings']['IPAddress'], con_info['Name'].replace('/', ''), node_ip, container_id[0:12])
+                NodeInfo.update_con_usage(container_id[0:12],con_info['NetworkSettings']['IPAddress'],con_info['Name'].replace('/',''),node_ip)
             return 0
         else:
             print("Please enter the Container ID")
@@ -139,7 +143,7 @@ class Myswarm(object):
         tmp_dict['id_num'] = ret_json['Id'][0:12]
         tmp_dict['node_ip'] = node_ip
         tmp_dict['con_ip'] = ret_json['NetworkSettings']['IPAddress']
-        tmp_dict['name'] = ret_json['Name']
+        tmp_dict['name'] = ret_json['Name'].replace('/','')
         tmp_dict['image'] = ret_json['Image']
         tmp_dict['created'] = ret_json['State']['StartedAt']
         tmp_dict['state'] = con_state

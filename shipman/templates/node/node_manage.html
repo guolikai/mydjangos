@@ -6,36 +6,37 @@ $(document).ready(function() {
     $('#nodelist').DataTable();
 } );
 </script>
-<div id="content">
+
+<div id="content" style="padding-left: 30px;padding-right: 30px;padding-top: 15px">
 <head>
-    <ul><h4> 首页 > 资源管理 > 节点管理</h4></ul>
+    <h4> 首页 > 资源管理 > 节点管理</h4>
     <div >
         <input type="button" class="btn btn-primary" onclick="javascript:window.location.href='/nodeadd'" value="新增">
     </div>
 </head>
 
-<table id="nodelist" class="display" cellspacing="0" width="100%">
+<table id="nodelist" class="table table-bordered" cellspacing="0" width="100%">
         <thead>
         <tr>
-            <th >序号</th>
-            <th >节点名</th>
-            <th >节点IP</th>
-            <th >监听端口</th>
-            <th >CPU数</th>
-            <th >内存数</th>
-            <th >镜像数</th>
-            <th >状态</th>
-            <th >节点组</th>
-            <th >容器数</th>
-            <th >系统版本</th>
-            <th >内核版本</th>
-            <th >Docker版本</th>
-            <th >操作</th>
+            <th style="text-align: center;width:4%">序号</th>
+            <th style="text-align: center;width:6%">节点名</th>
+            <th style="text-align: center;width:6%">节点IP</th>
+            <th style="text-align: center;width:6%">监听端口</th>
+            <th style="text-align: center;width:6%">CPU数</th>
+            <th style="text-align: center;width:6%">内存数</th>
+            <th style="text-align: center;width:6%">镜像数</th>
+            <th style="text-align: center;width:6%">状态</th>
+            <th style="text-align: center;width:6%">节点组</th>
+            <th style="text-align: center;width:6%">容器数</th>
+            <th style="text-align: center;width:12%">系统版本</th>
+            <th style="text-align: center;width:12%">内核版本</th>
+            <th style="text-align: center;width:12%">Docker版本</th>
+            <th style="text-align: center;width:6%">操作</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody style="text-align: center">
         {% for node in node_data %}
-        <tr>
+        <tr class="success">
             <td>{{node}}</td>
             <td>{{node_data[node]["name"]}}</td>
             <td>{{node_data[node]["node_ip"]}}</td>

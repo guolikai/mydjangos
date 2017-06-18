@@ -4,6 +4,7 @@
 
 """ 执行mysql语句 """
 import hashlib
+
 from shipman.settings import DATABASES
 from shipman.model.mysql_server import MysqlServer
 
@@ -16,9 +17,9 @@ class UserSqlOperation(object):
         db.close()
         return ret
 
-    def insert_user_data(self,name,password,user_group):
+    def insert_user_data(name,password,user_group):
         db = MysqlServer(DATABASES)
-        sql = "insert into user(name,password,user_group) values('%s','md5(%s)','%s')" % (name,password,user_group)
+        sql = "insert into user(name,password,user_group) values(%s','md5(%s)','%s')" % (name,password,user_group)
         db.execute_sql(sql)
         db.close()
         return 0

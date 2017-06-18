@@ -1,9 +1,7 @@
 {% block div %}
-
+<div style="padding-left: 30px;padding-right: 30px;padding-top: 15px">
 <head>
-    <ul>
-        <h4> 首页 > 容器管理 > 用途修改 </h4>
-    </ul>
+    <h4> 首页 > 容器管理 > 用途修改 </h4>
 </head>
 
 <form class="form-horizontal" action="/conmodify?con_id={{single_con_usage_data[1]['con_id']}}" method="post">
@@ -58,5 +56,5 @@
       </div>
     </div>
 </form>
-
+</div>
 {% end %}

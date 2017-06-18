@@ -1,8 +1,8 @@
 {% extends "../head.html" %}
 {% block div %}
-
+<div style="padding-left: 30px;padding-right: 30px;padding-top: 15px">
 <head>
-    <ul><h4> 首页 > 资源管理 > 节点修改</h4></ul>
+    <h4> 首页 > 资源管理 > 节点修改</h4>
 </head>
 
 <form class="form-horizontal" action="/nodemodify?node_ip={{single_con_usage_data[1]['node_ip']}}&port={{single_con_usage_data[1]['port']}}" method="post">
@@ -41,4 +41,5 @@
       </div>
     </div>
 </form>
+    </div>
 {% end %}
