@@ -219,7 +219,7 @@ class ConCreate(BaseHandler):
             self.render('node/con_create.html', node_ip = node_ip, images = images_data)
 
     def post(self, *args, **kwargs):
-        json_ret = json.loads(basejson[0])
+       json_ret = json.loads(basejson[0])
         node_ip = self.get_argument('node_ip', 'None')
         if node_ip == 'None':
             print("There is no node ip")
@@ -267,6 +267,45 @@ class ConCreate(BaseHandler):
             if len(con_name) == 0:
                 con_name = str(uuid.uuid4())[0:13]
             name_list.append(con_name)
+<<<<<<< HEAD
+=======
+
+        threads = []
+        create_con = threading.Thread(target=self._create_con,args=(name_list,node_ip,node_port,json_ret))
+        threads.append(create_con)
+        create_pass = threading.Thread(target=self._create_pass)   #此函数在于构成for循环，用于异构
+        threads.append(create_pass)
+        for t in threads:
+            t.setDaemon(True)
+            t.start()
+        time.sleep(1)
+        self.write(u"%s节点上%s容器创建并启动成功" % (node_ip,con_num))
+
+
+    def _create_con(self,name_list,node_ip, node_port, json_ret):
+        #print(name_list)
+        for i in range(len(name_list)):
+            if len(name_list[i]) == 0:
+                json_ret['Name'] = str(uuid.uuid4())[0:13]
+                json_ret['Hostname'] = json_ret['Name']
+            elif len(name_list[i]) == 13:
+                json_ret['Name'] = name_list[i]
+                json_ret['Hostname'] = name_list[i]
+            else:
+                json_ret['Name'] = name_list[i]
+                json_ret['Hostname'] = str(uuid.uuid4())[0:13]
+            print(u'节点:[%s],端口:[%s],容器ID:[%s],容器名:[%s]' % (node_ip, node_port, json_ret['Hostname'], json_ret['Name']))
+            myswarm = Myswarm()
+            container_id = myswarm.create_container(node_ip, node_port, json_ret)
+            if not container_id:
+                print("Can not create the Container")
+                return
+            #print(node_ip, node_port,container_id)
+            ret = myswarm.start_container(node_ip, node_port, container_id)
+            print(u"%s节点上容器%s创建并启动成功" % (node_ip,container_id[0:12]))
+    def _create_pass(self):
+        pass
+>>>>>>> e112b4fb623db7a3307db4b020b09b1f466ee07a
 
         threads = []
         create_con = threading.Thread(target=self._create_con,args=(name_list,node_ip,node_port,json_ret))
