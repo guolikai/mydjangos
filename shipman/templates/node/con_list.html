@@ -1,0 +1,66 @@
+{% extends "../head.html" %}
+{% block div %}
+
+<div style="padding-left: 30px;padding-right: 30px;padding-top: 15px">
+<head>
+    <h4>首页 > 容器管理 > 容器用途管理</h4>
+</head>
+
+<table id="conlist" class="table table-bordered" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th style="text-align: center" width="5%">序号</th>
+            <th style="text-align: center" width="15%">容器ID</th>
+            <th style="text-align: center" width="15%">容器IP</th>
+            <th style="text-align: center" width="15%">容器名</th>
+            <th style="text-align: center" width="15%">节点IP</th>
+            <th style="text-align: center" width="10%">用户</th>
+            <th style="text-align: center" width="10%">应用</th>
+            <th style="text-align: center" width="10%">描述</th>
+            <th style="text-align: center" width="15%">操作</th>
+        </tr>
+    </thead>
+    <tbody style="text-align: center">
+        {% for con in con_data %}
+        <tr class="success">
+            <td >{{con}}</td>
+            <td id="con_id">{{con_data[con]["con_id"]}}</td>
+            <td id="con_ip">{{con_data[con]["con_ip"]}}</td>
+            <td id="con_name">{{con_data[con]["con_name"]}}</td>
+            <td id="node_ip">{{con_data[con]["node_ip"]}}</td>
+            <td id="user_name">{{con_data[con]["user_name"]}}</td>
+            <td id="con_app">{{con_data[con]["con_app"]}}</td>
+            <td id="con_desc">{{con_data[con]["con_desc"]}}</td>
+            <td><a data-toggle="modal" href="/conmodify?action=modify&con_id={{con_data[con]["con_id"]}}" data-target="#myModal"><img src='static/images/modify.png' alt='修改' title='修改' /></a></td>
+        </tr>
+        {% end %}
+    </tbody>
+</table>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel"> 
+                 容器修改
+            </h4>
+         </div>
+         <div class="modal-body">
+         </div>
+      </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#conlist').DataTable();
+} );
+</script>
+
+<script type="text/javascript">
+    $("#myModal").on("hidden.bs.modal", function() {
+        $(this).removeData("bs.modal");
+    });
+</script>
+</div>
+{% end %}

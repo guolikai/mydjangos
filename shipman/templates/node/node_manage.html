@@ -1,0 +1,110 @@
+{% extends "../head.html" %}
+{% block div %}
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#nodelist').DataTable();
+} );
+</script>
+
+<div id="content" style="padding-left: 30px;padding-right: 30px;padding-top: 15px">
+<head>
+    <h4> 首页 > 资源管理 > 节点管理</h4>
+    <div >
+        <input type="button" class="btn btn-primary" onclick="javascript:window.location.href='/nodeadd'" value="新增">
+    </div>
+</head>
+
+<table id="nodelist" class="table table-bordered" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+            <th style="text-align: center;width:4%">序号</th>
+            <th style="text-align: center;width:6%">节点名</th>
+            <th style="text-align: center;width:6%">节点IP</th>
+            <th style="text-align: center;width:6%">监听端口</th>
+            <th style="text-align: center;width:6%">CPU数</th>
+            <th style="text-align: center;width:6%">内存数</th>
+            <th style="text-align: center;width:6%">镜像数</th>
+            <th style="text-align: center;width:6%">状态</th>
+            <th style="text-align: center;width:6%">节点组</th>
+            <th style="text-align: center;width:6%">容器数</th>
+            <th style="text-align: center;width:12%">系统版本</th>
+            <th style="text-align: center;width:12%">内核版本</th>
+            <th style="text-align: center;width:12%">Docker版本</th>
+            <th style="text-align: center;width:6%">操作</th>
+        </tr>
+        </thead>
+        <tbody style="text-align: center">
+        {% for node in node_data %}
+        <tr class="success">
+            <td>{{node}}</td>
+            <td>{{node_data[node]["name"]}}</td>
+            <td>{{node_data[node]["node_ip"]}}</td>
+            <td>{{node_data[node]["port"]}}</td>
+            <td>{{node_data[node]["cpus"]}}</td>
+            <td>{{node_data[node]["mem"]}}</td>
+            <td>{{node_data[node]["images"]}}</td>
+            <td>{{node_data[node]["state"]}}</td>
+            <td>{{node_data[node]["node_group"]}}</td>
+            <td>{{node_data[node]["containers"]}}</td>
+            <td>{{node_data[node]["os_version"]}}</td>
+            <td>{{node_data[node]["kernel_version"]}}</td>
+            <td>{{node_data[node]["docker_version"]}}</td>
+            <th><a data-toggle="modal" href="/nodemodify?action=modify&node_ip={{node_data[node]["node_ip"]}}" data-target="#myModal">
+				    <img src='static/images/modify.png' alt='修改' title='修改' /></a>
+				<!--
+				<a onClick="return confirm('注意：确定要删除此条目吗？')" href="/nodemodify?action=delete&node_ip={{node_data[node]["node_ip"]}}"><img src='static/images/remove.png' alt='删除' title='删除' /></a>
+
+				<a href="/"  target="_parent" onclick="Delete(this,{{node_data[node]["node_ip"]}});">
+                    <img src='static/images/remove.png'/>
+                </a> -->
+
+                <a href="#" onclick="return confirm('注意：确定要删除此条目吗？'),Delete(this,'{{node_data[node]["node_ip"]}}');">
+                    <img src='static/images/remove.png'/>
+                </a>
+			</th
+	   </tr>
+        {% end %}
+        </tbody>
+</table>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel"> 
+                 容器修改
+            </h4>
+         </div>
+         <div class="modal-body">
+         </div>
+      </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>
+
+<script type="text/javascript">
+    $("#myModal").on("hidden.bs.modal", function() {
+        $(this).removeData("bs.modal");
+    });
+</script>
+
+<script type='text/javascript'>
+		function Delete(doc,id){
+			$.ajax({
+				url:'/nodedelete/',
+				data:{node_ip:id},
+				type:'post',
+				success:function(callback){
+					var obj = jQuery.parseJSON(callback);
+					if(obj.status==0){
+						//$(doc).text(obj.message);
+					}else{
+						alert(obj.message);}
+				}
+			});
+		}
+</script>
+
+
+{% end %}
