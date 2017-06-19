@@ -116,6 +116,9 @@ class Myswarm(object):
             ret = NodeInfo.get_con_usage_info(container_id,node_ip)
             if len(ret) == 0:
                 NodeInfo.insert_con_usage(container_id[0:12],con_info['NetworkSettings']['IPAddress'],con_info['Name'].replace('/',''),node_ip)
+            else:
+                #print(con_info['NetworkSettings']['IPAddress'], con_info['Name'].replace('/', ''), node_ip, container_id[0:12    ])
+                NodeInfo.update_con_usage(container_id[0:12],con_info['NetworkSettings']['IPAddress'],con_info['Name'].replac    e('/',''),node_ip)
             return 0
         else:
             print("Please enter the Container ID")
