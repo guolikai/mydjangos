@@ -219,11 +219,12 @@ class ConCreate(BaseHandler):
             self.render('node/con_create.html', node_ip = node_ip, images = images_data)
 
     def post(self, *args, **kwargs):
-        json_ret = json.loads(basejson[0])
+       json_ret = json.loads(basejson[0])
         node_ip = self.get_argument('node_ip', 'None')
         if node_ip == 'None':
             print("There is no node ip")
             return
+
         port_ret = NodeInfo.get_node_port(node_ip)
         if len(port_ret) < 1:
             print("There is no port of the node")
@@ -231,34 +232,77 @@ class ConCreate(BaseHandler):
         else:
             node_port = port_ret[0][0]
 
+        con_name = self.get_argument('con_name',None)
+        con_num = self.get_argument('con_num', None)
+        if len(con_num) == 0:
+            con_num = 1
+        con_num = int(con_num)
+        print(u'待创建容器个数:%s'% (con_num))
+
         con_dict = {}
-        for key in ['con_name','Cmd', 'Image', 'CpuPeriod', 'CpuQuota', 'CpuShares', 'Memory']:
+        for key in ['Cmd', 'Image', 'CpuPeriod', 'CpuQuota', 'CpuShares', 'Memory']:
             con_dict[key] = self.get_argument(key.lower())
             if key == 'Cmd' and con_dict[key] != "":
                 json_ret[key] = con_dict[key].split()
             elif key == 'Image' and con_dict[key] != "":
                 json_ret[key] = con_dict[key]
-            elif key == 'con_name' and con_dict[key] != "":
-                json_ret[key] = con_dict[key]
             elif con_dict[key] != "":
                 json_ret['HostConfig'][key] = int(con_dict[key])
 
-        myswarm = Myswarm()
-        if len(json_ret['con_name']) ==0:
-            json_ret['Name'] = str(uuid.uuid4())[0:13]
-            json_ret['Hostname'] = json_ret['Name']
+        name_list = []
+        if con_num > 1:
+            for num in range(con_num):
+                #print(num + 1)
+                if len(con_name) == 0:
+                    con_name = str(uuid.uuid4())[0:13]
+                    #print(u'待创建容器名:%s' % con_name)
+                    name_list.append(con_name)
+                    con_name = ''
+                else:
+                    con_name = '%s%s' % (con_name, str(num + 1))
+                    #print(u'待创建容器名:%s' % con_name)
+                    name_list.append(con_name)
+                    con_name = con_name[:-len(str(num + 1))]
         else:
-            json_ret['Name'] = json_ret['con_name']
-            json_ret['Hostname'] = str(uuid.uuid4())[0:13]
-        print(node_ip, node_port,json_ret['Hostname'],json_ret['Name'])
-        container_id = myswarm.create_container(node_ip, node_port, json_ret)
-        if not container_id:
-            print("Can not create the Container")
-            return
-        #print(node_ip, node_port,container_id)
-        ret = myswarm.start_container(node_ip, node_port,container_id)
-        if ret==0:
-            self.write(u"%s节点上容器%s创建并启动成功" % (node_ip,container_id[0:12]))
+            if len(con_name) == 0:
+                con_name = str(uuid.uuid4())[0:13]
+            name_list.append(con_name)
+
+        threads = []
+        create_con = threading.Thread(target=self._create_con,args=(name_list,node_ip,node_port,json_ret))
+        threads.append(create_con)
+        create_pass = threading.Thread(target=self._create_pass)   #此函数在于构成for循环，用于异构
+        threads.append(create_pass)
+        for t in threads:
+            t.setDaemon(True)
+            t.start()
+        time.sleep(1)
+        self.write(u"%s节点上%s容器创建并启动成功" % (node_ip,con_num))
+
+
+    def _create_con(self,name_list,node_ip, node_port, json_ret):
+        #print(name_list)
+        for i in range(len(name_list)):
+            if len(name_list[i]) == 0:
+                json_ret['Name'] = str(uuid.uuid4())[0:13]
+                json_ret['Hostname'] = json_ret['Name']
+            elif len(name_list[i]) == 13:
+                json_ret['Name'] = name_list[i]
+                json_ret['Hostname'] = name_list[i]
+            else:
+                json_ret['Name'] = name_list[i]
+                json_ret['Hostname'] = str(uuid.uuid4())[0:13]
+            print(u'节点:[%s],端口:[%s],容器ID:[%s],容器名:[%s]' % (node_ip, node_port, json_ret['Hostname'], json_ret['Name']))
+            myswarm = Myswarm()
+            container_id = myswarm.create_container(node_ip, node_port, json_ret)
+            if not container_id:
+                print("Can not create the Container")
+                return
+            #print(node_ip, node_port,container_id)
+            ret = myswarm.start_container(node_ip, node_port, container_id)
+            print(u"%s节点上容器%s创建并启动成功" % (node_ip,container_id[0:12]))
+    def _create_pass(self):
+        pass
 
 
 class ConAction(BaseHandler):
