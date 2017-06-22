@@ -106,5 +106,20 @@ $(document).ready(function() {
 		}
 </script>
 
+<script type="text/javascript">
+    //var obj = document.getElementsByClassName("success");
+    var obj = document.getElementsByTagName("tr");
+    var len = obj.length;
+    //console.log(obj,len);
+    for (var i=0;i<len;i++) {
+        var current_obj = obj[i];
+        //console.log(current_obj.children[2].innerText);
+        if(current_obj.children[7].innerText=='1'){
+            current_obj.classList.remove('success');
+            current_obj.classList.add('danger');
+        }
+    }
+</script>
+
 
 {% end %}
