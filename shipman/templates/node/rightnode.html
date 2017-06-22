@@ -1,0 +1,70 @@
+{% extends "../head.html" %}
+{% block div %}
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#conlist').DataTable({
+            //"paging":   false
+        });
+    } );
+</script>
+<div id="content" style="padding-left: 30px;padding-right: 30px;padding-top: 15px">
+<head>
+    <h4>首页 > 容器管理 > 容器列表</h4>
+    <div>
+        <input type="button" class="btn btn-primary " onclick="javascript:window.location.href='/concreate?node_ip={{node_ip}}'" value="创建容器">
+    </div>
+</head>
+
+<table id="conlist" class="table table-bordered" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th style="text-align: center;width: 4%">序号</th>
+            <th style="text-align: center;width: 9%">容器ID</th>
+            <th style="text-align: center;width: 9%">容器IP</th>
+            <th style="text-align: center;width: 9%">容器名</th>
+            <th style="text-align: center;width: 9%">CPU时间</th>
+            <th style="text-align: center;width: 9%">CPU配额</th>
+            <th style="text-align: center;width: 9%">内存</th>
+            <th style="text-align: center;width: 9%">状态</th>
+            <th style="text-align: center;width: 15%">运行命令</th>
+            <th style="text-align: center;width: 15%">创建时间</th>
+            <th style="text-align: center;">操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for con in con_data %}
+        <tr class="success">
+            <td style="text-align: center">{{con}}</td>
+            <td style="text-align: center">{{con_data[con]['id_num']}}</td>
+            <td style="text-align: center">{{con_data[con]["con_ip"]}}</td>
+            <td style="text-align: center">{{con_data[con]["con_name"]}}</td>
+            <td style="text-align: center">{{con_data[con]["cpuperiod"]}}</td>
+            <td style="text-align: center">{{con_data[con]["cpuquota"]}}</td>
+            <td style="text-align: center">{{con_data[con]["memory"]}}</td>
+            <td style="text-align: center">{{con_data[con]["state"]}}</td>
+            <td style="text-align: center">{{con_data[con]["cmd"]}}</td>
+            <td style="text-align: center">{{con_data[con]["created"]}}</td>
+            <td style="text-align: center">
+                <input type="button" class="btn btn-primary btn-xs" onclick="javascript:window.location.href='/conaction?con_id={{con_data[con]["id_num"]}}'" value="操作">
+            </td>
+        </tr>
+        {% end %}
+    </tbody>
+</table>
+</div>
+<script type="text/javascript">
+    //var obj = document.getElementsByClassName("success");
+    var obj = document.getElementsByTagName("tr");
+    var len = obj.length;
+    //console.log(obj,len);
+    for (var i=0;i<len;i++) {
+        var current_obj = obj[i];
+        //console.log(current_obj.children[2].innerText);
+        if(current_obj.children[7].innerText=='exited'){
+            current_obj.classList.remove('success');
+            current_obj.classList.add('danger');
+        }
+    }
+</script>
+{% end %}
