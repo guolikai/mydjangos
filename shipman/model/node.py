@@ -134,13 +134,7 @@ class NodeInfo(object):
         ret = db.run_sql(sql)
         db.close()
         return ret
-    @staticmethod
-    def update_con_usage(con_id, con_ip, con_name, node_ip):
-        db = MysqlServer(DATABASES)
-        sql = "update con_usage set con_ip='%s',con_name='%s' where node_ip='%s' and con_id='%s'" % (con_ip, con_name, node_i    p,con_id)
-        db.execute_sql(sql)
-        db.close()
-        return 0
+
 
     @staticmethod
     def set_con_usage_modify(con_dic):

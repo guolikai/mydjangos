@@ -9,11 +9,11 @@ import tornado.web
 import tornado.options
 
 from tornado.options import define, options, parse_command_line
-define('port', default=8888, type=int, help="run on the port")
+define('port', default=8000, type=int, help="run on the port")
 from shipman.url import urls
 
 def main():
-    PORT = 8888
+    PORT = 8000
     SETTINGS = dict(
         template_path=os.path.join(os.path.dirname(__file__), "templates"),
         static_path=os.path.join(os.path.dirname(__file__), "static"),

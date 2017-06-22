@@ -13,7 +13,6 @@ logger = logging.getLogger(__name__)
 
 class MysqlServer(object):
     """连接Mysql数据服务器 """
-
     def __init__(self, db_config):
         try:
             self._db_config = db_config
