@@ -1,0 +1,28 @@
+#This is My shipman Docakfile
+#version 1.0
+#Author: Guolikai
+
+#Base images 基础镜像
+FROM python3
+
+#MAINTAINER 维护者信息
+MAINTAINER Guolikai
+
+#ADD (COPY文件，tar文件会自动解压)
+#RUN cd /App/src/SRT/ && git clone https://github.com/guolikai/ops.git
+ADD ./shipman.tar.gz /App/src/SRT/
+
+#shipman docker-env制作
+WORKDIR /
+RUN pip3 install virtualenv &&  virtualenv  -p python3 /shipman-env --no-site-packages && \
+    source /shipman-env/bin/activate && \
+    ln -s /App/src/SRT/shipman /shipman-env/lib/python3.6/site-packages/ && \
+    /bin/bash /shipman-env/lib/python3.6/site-packages/shipman/utils/build-env.sh && \
+    chmod +x /shipman-env/lib/python3.6/site-packages/shipman/utils/start.sh
+
+#EXPOSE 容器里的端口
+ENV  PATH  /shipman-env/lib/python3.6/site-packages/shipman/utils/:$PATH
+EXPOSE 8000
+#CMD 容器执行的命令
+#CMD ["/shipman-env/lib/python3.6/site-packages/shipman/utils/start.sh"]
+CMD ["docker-start.sh"]

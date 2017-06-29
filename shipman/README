@@ -16,7 +16,7 @@ OPTIONS='--selinux-enabled --log-driver=journald --signature-verification=false 
 [root@localhost ~]# docker run -d  --name web02 -p 8082:80 -m 50M --memory-swap 200M nginx
 
 2、用virtualenv建立多个Python独立开发环境,
-本项目需要安装的模块(python3环境):、pycurl、pymysql、sqlalchemy、tornado、docker-py
+本项目需要安装的模块(python3环境):pycurl、pymysql、sqlalchemy、tornado、docker-py、docker
 #http://www.cnblogs.com/hiddenfox/p/virtualenv-python3.html
 #http://www.nowamagic.net/academy/detail/1330228
 #在创建virtualenv时增加 --no-site-packages 选项的virtualenv就不会读取系统包
@@ -24,10 +24,10 @@ OPTIONS='--selinux-enabled --log-driver=journald --signature-verification=false 
 [root@localhost ~]# virtualenv  -p python3 /root/workspace/shipman-env --no-site-packages
 [root@localhost ~]# cd /root/workspace/shipman-env
 [root@localhost shipman]# source bin/activate
-(shipman-env) [root@localhost shipman]# pip3 uninstall pycurl
+(shipman-env) [root@localhost shipman]# pip3 install pycurl  pymysql sqlalchemy tornado docker docker-py
+(shipman-env) [root@localhost shipman]# pip3 uninstall pycurl -y
 (shipman-env) [root@localhost shipman]# export PYCURL_SSL_LIBRARY=openssl
-(shipman-env) [root@localhost shipman]# easy_install-3.5 pycurl
-(shipman-env) [root@localhost shipman]# pip3 install pymysql sqlalchemy tornado docker docker-py
+(shipman-env) [root@localhost shipman]# easy_install pycurl
 
 3、### Docker Management System项目启动 ###
 (shipman-env) [root@localhost shipman]# python3 /root/workspace/shipman/lib/python3.5/site-packages/shipman/main.py  &
@@ -36,7 +36,5 @@ OPTIONS='--selinux-enabled --log-driver=journald --signature-verification=false 
 root       3192  0.0  0.6 131944  6636 pts/1    T    22:25   0:00 python3
 root       4178  3.1  2.8 279564 28432 pts/1    S    22:59   0:00 python3 /root/workspace/shipman-env/lib/python3.5/site-packages/shipman/main.py
 
-
 4、mysql数据库字符集设置
 http://database.51cto.com/art/201010/229171.htm
-
