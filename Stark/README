@@ -1,0 +1,30 @@
+项目概述：Stack
+    用python3写的自动化运维、监控平台，采用Django框架。包含以下模块：
+	'Wolf',     #自定义用户系统
+	'Arya',     #salt源码实现
+	'Sansa',    #CMDB--->Configuration Management Database 配置管理数据库
+	'Robb',     #分布式监控系统
+项目收获:    
+    通过学习本项目可以了解复杂自动化项目的架构设计、程序解耦原则、前后端数据交互等多项实战技能。
+项目环境部署：
+1.Python3环境部署：
+#-------------------------------------------------------------------------
+pip3 install virtualenv
+virtualenv  -p python3 /root/workspace/python3-env --no-site-packages
+source  /root/workspace/python3-env/bin/activate
+pip3 install django pycurl pymysql  redis djangorestframework
+python3 manage.py makemigrations
+python3 manage.py migrate
+#-------------------------------------------------------------------------
+2.创建管理员及测试账户:
+后台管理员账户密码: admin glk123456
+测试账户密码：test glk123456
+#-------------------------------------------------------------------------
+(python3-env) [root@localhost Stark]# python3 manage.py  createsuperuser
+Email address: admin@lzhot.net
+Password: 
+Password (again): 
+Superuser created successfully.
+#-------------------------------------------------------------------------
+3.项目运行测试：
+python3 manage.py  runserver 0.0.0.0:8000
