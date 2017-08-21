@@ -30,6 +30,7 @@ OPTIONS='--selinux-enabled --log-driver=journald --signature-verification=false 
 (shipman-env) [root@localhost shipman]# easy_install pycurl
 
 3、### Docker Management System项目启动 ###
+(shipman-env) [root@localhost utils]# python3 /root/workspace/ops/shipman/utils/dbCreatePY.py 
 (shipman-env) [root@localhost shipman]# python3 /root/workspace/shipman/lib/python3.5/site-packages/shipman/main.py  &
 (shipman-env) [root@localhost shipman]# deactivate
 [root@localhost ~]# ps aux | grep -v grep | grep python3
