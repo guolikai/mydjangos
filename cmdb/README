@@ -3,7 +3,7 @@
     
 操作过程：
 1、用virtualenv建立多个Python独立开发环境,
-本项目需要安装的模块(python3环境):pycurl、pymysql、sqlalchemy、tornado、docker-py、docker
+本项目需要安装的模块(python3环境):django pycurl pymysql
 #http://www.cnblogs.com/hiddenfox/p/virtualenv-python3.html
 #http://www.nowamagic.net/academy/detail/1330228
 #在创建virtualenv时增加 --no-site-packages 选项的virtualenv就不会读取系统包
