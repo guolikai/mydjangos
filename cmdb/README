@@ -1,0 +1,31 @@
+项目名：CMDB资产管理项目
+    用python3写的Docker管理系统软件，采用Django框架;
+    
+操作过程：
+1、用virtualenv建立多个Python独立开发环境,
+本项目需要安装的模块(python3环境):pycurl、pymysql、sqlalchemy、tornado、docker-py、docker
+#http://www.cnblogs.com/hiddenfox/p/virtualenv-python3.html
+#http://www.nowamagic.net/academy/detail/1330228
+#在创建virtualenv时增加 --no-site-packages 选项的virtualenv就不会读取系统包
+#--------------------------------------------------------------------------------------------
+[root@localhost ~]# pip3 install virtualenv
+[root@localhost ~]# virtualenv  -p python3 /root/workspace/python3-env --no-site-packages
+[root@localhost ~]# cd /root/workspace/python3-env
+[root@localhost python3-env]# source bin/activate
+(python3-env) [root@localhost cmdb]# pip3 install django pycurl  pymysql 
+#--------------------------------------------------------------------------------------------
+2.创建管理员及测试账户:
+后台管理员账户密码: admin glk123456
+测试账户密码：test glk123456
+#--------------------------------------------------------------------------------------------
+(python3-env) [root@localhost cmdb]# python3 manage.py  makemigrations
+(python3-env) [root@localhost cmdb]# python3 manage.py  migrate
+(python3-env) [root@localhost cmdb]# python3 manage.py  createsuperuser
+Email address: admin@lzhot.net
+Password: 
+Password (again): 
+Superuser created successfully.
+#--------------------------------------------------------------------------------------------
+3.### CMDB资产管理项目 运行测试###
+python3 manage.py  runserver 0.0.0.0:8000
+#--------------------------------------------------------------------------------------------
