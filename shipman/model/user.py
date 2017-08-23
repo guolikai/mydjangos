@@ -29,5 +29,6 @@ if __name__ == '__main__':
     name, password, user_group = usermsg['name'],usermsg['password'],usermsg['user_group']
     userinfo = UserSqlOperation()
     ret = userinfo.insert_user_data(name, password, user_group)
+    #insert into user(name,password,user_group) values('admin',md5(123456),'Admin')
     if ret ==0:
         print(u'%s用户插入成功' % name)
