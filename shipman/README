@@ -6,6 +6,8 @@
 操作过程：
 1、docker守护进程部署
 [root@localhost ~]# yum -y install docker
+[root@localhost ~]# rpm -qa docker
+docker-1.12.6-28.git1398f24.el7.centos.x86_64
 [root@localhost ~]# grep "\-H" /etc/sysconfig/docker
 OPTIONS='--selinux-enabled --log-driver=journald --signature-verification=false -H tcp://172.16.1.101:2375 -H unix:///var/run/docker.sock'
 [root@localhost ~]# systemctl start docker && systemctl enable docker
