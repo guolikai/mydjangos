@@ -1,0 +1,3 @@
+#查询数据库大小变化
+mysql> select a.database_size,b.database_size,a.database_size - b.database_size as bianhua,a.database_info_id from app01_databasesize a,app01_databasesize b where a.create_date='2017-12-11' and b.create_date='2017-12-10' and a.database_info_id=b.database_info_id;
+

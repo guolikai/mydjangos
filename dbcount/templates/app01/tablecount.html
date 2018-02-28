@@ -1,0 +1,61 @@
+{% extends "../head.html" %}
+{% block div %}
+
+<div style="padding-left: 30px;padding-right: 30px;padding-top: 15px">
+<head>
+    <h4> 首页 > 表数据管理 > 表数据</h4>
+</head>
+
+<table id="hostinfo" class="table table-bordered" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th style="text-align: center" width="5%">序号</th>
+            <th style="text-align: center" width="5%">表记录数</th>
+            <th style="text-align: center" width="10%">表名</th>
+            <th style="text-align: center" width="5%">数据库名</th>
+            <th style="text-align: center" width="5%">数据库端口</th>
+            <th style="text-align: center" width="10%">数据库主机</th>
+            <th style="text-align: center" width="10%">记录时间</th>
+        </tr>
+    </thead>
+    <tbody style="text-align: center">
+        {% for key,value in data.items %}
+            <tr>
+                <td>{{value.id}}</td>
+                <td>{{value.table_count}}</td>
+                <td>{{value.table_name}}</td>
+                <td>{{value.table_db}}</td>
+                <td>{{value.table_port}}</td>
+                <td>{{value.table_host}}</td>
+                <td>{{value.create_date}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel">
+                 容器修改
+            </h4>
+         </div>
+         <div class="modal-body">
+         </div>
+      </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#hostinfo').DataTable();
+} );
+</script>
+
+<script type="text/javascript">
+    $("#myModal").on("hidden.bs.modal", function() {
+        $(this).removeData("bs.modal");
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" dir="ltr">
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <link href="/static/css/all.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/bootstrap3/css/bootstrap-theme.min.css">
+    <script src="/static/bootstrap3/js/jquery-1.11.2.min.js"></script>
+    <script src="/static/bootstrap3/js/bootstrap.min.js"></script>
+</head>
+<body >
+    <div class="head">
+        <div style="background-color: #3FD6F9 ">
+          <span class='logo'>
+              <br>
+          </span>
+            <p class="logout">
+                    您好:{{username}}|<a href='/app01/logout'> 退出</a>
+                </p>
+        </div>
+        <div style="padding:10px;padding-left: 200px" class="btn-group" role="group" >
+            <button href='#' id='block' type="button" class="btn btn-primary">数据管理</button>
+            <button href='#' id='block' type="button" class="btn">备份管理</button>
+            <button href='#' id='block' type="button" class="btn">日志分析</button>
+            <button href='#' id='block' type="button" class="btn">安全审计</button>
+        </div>
+        <div style="background-color: #2b669a"></div>
+    </div>
+    <script type="text/javascript">
+    $(".btn-group  #block").click(function(){
+        $(this).addClass("btn-primary");
+        $(this).siblings().removeClass("btn-primary");
+    });
+    </script>
+
+    {% block div %}
+    {% endblock %}
+</body>
+</html>

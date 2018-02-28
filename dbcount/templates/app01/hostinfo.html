@@ -1,0 +1,53 @@
+{% extends "../head.html" %}
+{% block div %}
+
+<div style="padding-left: 30px;padding-right: 30px;padding-top: 15px">
+<head>
+    <h4>首页 > 数据库管理 > 数据库信息</h4>
+</head>
+
+<table id="hostinfo" class="table table-bordered" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th style="text-align: center" width="10%">序号</th>
+            <th style="text-align: center" width="45%">主机名</th>
+            <th style="text-align: center" width="45%">主机IP</th>
+        </tr>
+    </thead>
+    <tbody style="text-align: center">
+        {% for item in data %}
+            <tr><td>{{item.id}}</td>
+                <td>{{item.hostname}}</td>
+                <td>{{item.ip}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel">
+                 容器修改
+            </h4>
+         </div>
+         <div class="modal-body">
+         </div>
+      </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#hostinfo').DataTable();
+} );
+</script>
+
+<script type="text/javascript">
+    $("#myModal").on("hidden.bs.modal", function() {
+        $(this).removeData("bs.modal");
+    });
+</script>
+</div>
+{% endblock %}

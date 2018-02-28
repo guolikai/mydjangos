@@ -1,0 +1,29 @@
+{% extends "../head.html" %}
+{% block div %}
+
+<div style="padding-left: 30px;padding-right: 30px;padding-top: 15px">
+    <head>
+        <h4> 首页 >  数据库统计平台 </h4>
+        <button type="button" class="btn btn-primary">联系方式</button>
+    </head>
+
+<table id="hostinfo" class="table table-bordered" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th style="text-align: center" width="10%">序号</th>
+            <th style="text-align: center" width="30%">联系人</th>
+            <th style="text-align: center" width="30%">联系人电话</th>
+            <th style="text-align: center" width="30%">联系人邮箱</th>
+        </tr>
+    </thead>
+    <tbody style="text-align: center">
+        {% for item in data %}
+            <tr><td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.mobile}}</td>
+                <td>{{item.email}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
