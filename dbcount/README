@@ -1,3 +1,37 @@
+项目名：DBCOUNT数据库分析系统
+    基于python3、django的数据库统计分析系统，前端、后端、数据存储等全部自己实现。
+    可实现数据库的日常数据变化及分析，满足数据统计的工作需要。
+    
+#--------------------------------------------------------------------------------------------    
+操作过程：
+1、用virtualenv建立多个Python独立开发环境,本项目需要安装的模块(python3环境):django pycurl pymysql
+#http://www.cnblogs.com/hiddenfox/p/virtualenv-python3.html
+#http://www.nowamagic.net/academy/detail/1330228
+#在创建virtualenv时增加 --no-site-packages 选项的virtualenv就不会读取系统包
+#--------------------------------------------------------------------------------------------
+[root@localhost ~]# pip3 install virtualenv
+[root@localhost ~]# virtualenv  -p python3 /root/workspace/python3-env --no-site-packages
+[root@localhost ~]# source /root/workspace/python3-env/bin/activate
+(python3-env) [root@localhost ~]# pip3 install django pycurl  pymysql 
+#--------------------------------------------------------------------------------------------
+2.创建管理员及测试账户:
+后台管理员账户密码: admin glkadmin
+测试账户密码：test glktest
+(python3-env) [root@localhost ~]#cd /root/workspace/python3-dev/dbcount
+(python3-env) [root@localhost dbcount]# python3 manage.py  makemigrations
+(python3-env) [root@localhost dbcount]# python3 manage.py  migrate
+(python3-env) [root@localhost dbcount]# python3 manage.py  createsuperuser
+Email address: admin@lzhot.net
+Password: 
+Password (again): 
+Superuser created successfully.
+#--------------------------------------------------------------------------------------------
+3.### 项目 运行测试###
+[root@localhost dbcount]# python3 manage.py  runserver 0.0.0.0:8000
+### 执行脚本启动: ### 
+[root@localhost dbcount]#  sh /root/workspace/python3-dev/dbcount/dbcount-start.sh
+#--------------------------------------------------------------------------------------------
+4.常用SQL语句：
 #查询数据库大小变化
 mysql> select a.database_size,b.database_size,a.database_size - b.database_size as bianhua,a.database_info_id from app01_databasesize a,app01_databasesize b where a.create_date='2017-12-11' and b.create_date='2017-12-10' and a.database_info_id=b.database_info_id;
-
+#--------------------------------------------------------------------------------------------
