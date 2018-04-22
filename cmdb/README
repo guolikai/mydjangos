@@ -1,5 +1,5 @@
 项目名：CMDB资产管理项目
-    用python3写的Docker管理系统软件，采用Django框架;
+    用python3写的CMDB资产管理系统，采用Django框架;
     
 操作过程：
 1、用virtualenv建立多个Python独立开发环境,
