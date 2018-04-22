@@ -15,8 +15,8 @@
 (python3-env) [root@localhost cmdb]# pip3 install django pycurl  pymysql 
 #--------------------------------------------------------------------------------------------
 2.创建管理员及测试账户:
-后台管理员账户密码: admin glk123456
-测试账户密码：test glk123456
+后台管理员账户密码: srtadmin glk123456
+测试账户密码：srttest glk123456
 #--------------------------------------------------------------------------------------------
 (python3-env) [root@localhost cmdb]# python3 manage.py  makemigrations
 (python3-env) [root@localhost cmdb]# python3 manage.py  migrate
