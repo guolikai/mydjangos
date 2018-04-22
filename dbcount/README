@@ -28,8 +28,10 @@ Superuser created successfully.
 #--------------------------------------------------------------------------------------------
 3.### 项目 运行测试###
 [root@localhost dbcount]# python3 manage.py  runserver 0.0.0.0:8000
-### 执行脚本启动: ### 
-[root@localhost dbcount]#  sh /root/workspace/python3-dev/dbcount/dbcount-start.sh
+### 执行脚本:创建项目 ### 
+[root@localhost dbcount]# sh /root/workspace/python3-dev/dbcount/dbcount-start.sh init
+### 执行脚本:启动项目 ### 
+[root@localhost dbcount]# sh /root/workspace/python3-dev/dbcount/dbcount-start.sh start
 #--------------------------------------------------------------------------------------------
 4.常用SQL语句：
 #查询数据库大小变化
