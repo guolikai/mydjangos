@@ -29,7 +29,7 @@ class UserInfoAdmin(admin.ModelAdmin):
     list_display = ('username','email')
     search_fields = ('username',)
 
-#admin.site.register(models.UserType,UserTypeAdmin)
-#admin.site.register(models.UserInfo,UserInfoAdmin)
+admin.site.register(models.UserType,UserTypeAdmin)
+admin.site.register(models.UserInfo,UserInfoAdmin)
 admin.site.register(models.UserGroup,UserGroupAdmin)
 admin.site.register(models.Asset,AssetAdmin)
