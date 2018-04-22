@@ -17,7 +17,7 @@ class UserInfo(models.Model):
     username = models.CharField(verbose_name="用户名",max_length=50)
     password = models.CharField(verbose_name="用户密码",max_length=50)
     email  = models.EmailField()
-    user_type = models.ForeignKey("UserType")
+    user_type = models.ForeignKey("UserType",on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = '用户信息'
@@ -37,7 +37,7 @@ class Asset(models.Model):
     ip = models.GenericIPAddressField(verbose_name="主机IP",)
     create_date = models.DateTimeField(verbose_name="创建日期",auto_now_add=True)
     update_date = models.DateTimeField(verbose_name="更新日期",auto_now=True)
-    user_group = models.ForeignKey("UserGroup")
+    user_group = models.ForeignKey("UserGroup",on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = '主机信息'
