@@ -89,7 +89,7 @@ DATABASES = {
         'NAME': 'dbcount',
         'USER': 'yxroot',
         'PASSWORD': 'srtadmin',
-        'HOST': '192.168.30.191',
+        'HOST': '172.16.1.200',
         'PORT': '3306',
     }
 }
