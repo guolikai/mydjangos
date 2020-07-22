@@ -223,11 +223,11 @@ def tablecount(request,*args,**kwargs):
 @outer
 def msinfo(request,*args,**kwargs):
     ret = {}
-    ret['data']='Master Slave Info Html Testing'
+    ret['data']='Main Subordinate Info Html Testing'
     return render(request,'app01/msinfo.html',ret)
 
 @outer
-def promoteslave(request,*args,**kwargs):
+def promotesubordinate(request,*args,**kwargs):
     ret = {}
-    ret['data']='Promote Slave  Html Testing'
-    return render(request,'app01/promoteslave.html',ret)
+    ret['data']='Promote Subordinate  Html Testing'
+    return render(request,'app01/promotesubordinate.html',ret)

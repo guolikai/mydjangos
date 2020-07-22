@@ -30,6 +30,6 @@ urlpatterns = [
     url(r'^tableinfo/$',views.tableinfo,name='tableinfo'),
     url(r'^tablecount/$',views.tablecount,name='tablecount'),
     url(r'^msinfo/$',views.msinfo,name='msinfo'),
-    url(r'^promoteslave/$',views.promoteslave,name='.promoteslave'),
+    url(r'^promotesubordinate/$',views.promotesubordinate,name='.promotesubordinate'),
 	url(r'^$',views.acc_login,name="dashboard"),
 ]
