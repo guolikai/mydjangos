@@ -17,6 +17,13 @@ from conf import settings
 # reload(sys)
 # sys.setdefaultencoding('utf-8')
 
+# 设置全局变量
+import os,sys
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+#print(BASE_DIR)
+sys.path.append(BASE_DIR)
+#print(sys.path)
+
 ##自定义变量
 Today = time.strftime("%Y%m%d%H%M%S")
 Now_Stamp = int(time.time())
